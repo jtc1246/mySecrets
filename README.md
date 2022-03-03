@@ -45,6 +45,7 @@
 ### (1) Hash
 
     Step 1: Convert original text to hex
+    Step 2: Add the length of hex data (in decimalism) to the last of hex data
     Step 2: Supple the length of hex data to the multiple of 128 by adding '0' at first
     Step 3: Convert every 128 digits to 64 digits by adding a 128-digit hex number, then multipling with a 192-digit hex number
             and then taking the mid 64 digits, until it becomes 64 digits.
@@ -79,7 +80,7 @@
     Step 1: Get the hash of the key, let it be the key in later program
     Step 2: Generate a random 32-digit hex value
             (You can also generate it with other methods or even give a specific value, but it cannot be same in two encryptions)
-    Step 3: Get the hash of the text, take first 16 digits, add it to the last of the text, let this be the text needed to be encrypted
+    Step 3: Get the hash of the text, take first 16 digits, add it to the last of the text
     Step 4: Generate the secret with the same length to text by using key and the random 32-digit hex value in following process:
             ① divide into n parts (n=length//64 or length//64+1) (depend on whether it is multiple of 64)
             ② for each part, get the hash of partNumber+ran+key (ran is the random 32-digit hex value) (partNumber starts from 0)
