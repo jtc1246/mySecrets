@@ -39,3 +39,24 @@
     key: any password you like
     
     The encrypted data is in jtc64 format.
+
+## 3. Algorithms
+
+### (1) Hash
+
+    Step 1: Convert original text to hex
+    Step 2: Supple the length of hex data to the multiple of 128 by adding '0' at first
+    Step 3: Convert every 128 digits to 64 digits by adding a 128-digit hex number, then multipling with a 192-digit hex number
+            and then taking the mid 64 digits, until it becomes 64 digits.
+            If the length is not the multiple of 128, add 64 '0' at first.
+            In the adding process, just add digit by digit, no carry.
+            The 128-digit and 192-digit hex number is randomly generated when I write the program, it is a fixed number.
+    Step 4: We finally get a 64-digit hex in step 3. Then create 20 groups, each group deal with this 64-digit hex in following process:
+            ① add a 64-digit hex digit by digit
+            ② disorder the digits of the hex text according to the pre-generated rule
+            ③ multiple it with a 128-digit hex number, then take the mid 64 digits
+            ④ disorder the digits of the hex text according to the rule in ②
+            (Note: the 64-digit hex in ①, the 128-digit hex number in ③ and the rule in ② are randomly generated when I write the program, they are fixed)
+    Step 5: Add the 20 64-digit hex numbers digit by digit, the result is the final hash.
+        
+            
