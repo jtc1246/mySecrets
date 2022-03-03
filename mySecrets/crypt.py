@@ -19,7 +19,7 @@ def encrypt(text:str,key:str):
     if(text==''):
         raise InputError
     key=getHash(key)
-    ran=getHash(str(rb(2**32))+str(rb(2**32))+str(time.time())+str(rb(2**32))+str(rb(2**32)))[0:32]
+    ran=getHash(getHash(text)+str(rb(2**32))+str(rb(2**32))+str(time.time())+str(rb(2**32))+str(rb(2**32)))[0:32]
     text=toHex(text)
     text=text+getHash(text)[0:16]
     l=len(text)
