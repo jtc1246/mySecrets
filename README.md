@@ -1,4 +1,4 @@
-# MySecrets v1.0.0
+# MySecrets v1.0.2
 
 ## 1. Introduction
 
