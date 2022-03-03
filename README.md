@@ -58,5 +58,18 @@
             ④ disorder the digits of the hex text according to the rule in ②
             (Note: the 64-digit hex in ①, the 128-digit hex number in ③ and the rule in ② are randomly generated when I write the program, they are fixed)
     Step 5: Add the 20 64-digit hex numbers digit by digit, the result is the final hash.
-        
-            
+    
+    (You can see the pre-generated things in hash.py or others/standard.txt)
+    
+### (2) Jtc64
+
+    Jtc64 is mainly composed of these characters: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@#'
+    Each character stands for the number of its location. e.g. 0 stands for 0, b stands for 11, Z stands for 61
+    Step 1: Convert original text to hex
+    Step 2: Each time take 3 digits, calculate num, num = first digit * 256 + second digit * 16 + third digit
+            num1 = num // 16; num2 = num % 16, convert num1 and num2 to corresponding jtc64 characters and put them together
+            All 3 hex digits convert to 2 jtc64 characters, then combine the jtc64 characters in the original order
+    Step 3: If there is no remaining hex digits, the convertion ends.
+            If 1 hex digit remains, add it to the last of jtc64 str directly.
+            If 2 hex digits remain, calculate num, num = first digit * 166 + second digit, num1 = num // 4; num2 = num % 4
+            Add the jtc64 character corresponding to num1 to the last of jtc64 str, $ % & = each stands for 0,1,2,3 in num2, add it to the last of jtc64 str
