@@ -1,5 +1,5 @@
 from .exceptions import NotHexError,NotJtc64Error,InputError,InvalidCiphertextError,VersionNotSupportError,PasswordWrongError
-from hash import getHash
+from .hash import getHash
 from .crypt import encrypt,decrypt
 from .jtc64 import hexToStr,toHex,hexToJtc64,strToJtc64,jtc64ToHex,jtc64ToStr
 
@@ -12,7 +12,7 @@ __all__=[
 ]
 
 
-__version__='0.9.0'
+__version__='1.0.0'
 __license__='GPL-2.0 License'
 __author__='Tiancheng Jiao'
 __github__='https://github.com/jtc1246/mySecrets'
