@@ -75,7 +75,7 @@
             If 2 hex digits remain, calculate num, num = first digit * 166 + second digit, num1 = num // 4; num2 = num % 4
             Add the jtc64 character corresponding to num1 to the last of jtc64 str, $ % & = each stands for 0,1,2,3 in num2, add it to the last of jtc64 str
 
-## (3) Symmetrical encryption
+### (3) Symmetrical encryption
 
     Step 1: Get the hash of the key, let it be the key in later program
     Step 2: Generate a random 32-digit hex value
@@ -90,3 +90,50 @@
     Step 7: Get the hash of the result in step 6, add the hash to the first of it
     Step 8: Add '0' in the last (to represent mode or version, because the program may update or add other mode later)
     Step 9: Convert it to jtc64
+
+## 4. Why it is secuse
+
+### (1) Hash
+    
+① 128-digit times with 192-digit or 64-digit times with 128-digit, even only change one digit in the original text, the middle 64 digits will be completely different, so this ensures the randomtivity of the hash.
+
+② Divide the last 64-digit hex into 20 groups, deal with them, then add together. Since we add 20 numbers together, we cannot get what each of them is. And we also need to add a 64-digit hex first, disorder them and times with another 128-digit hex, then disorder them. Then in each group, the result doesn't have any regularity to the original data. Then add them together, you cannot get the original text reversely.
+
+### (2) Symmetrical encryption
+
+① Is my key safe?
+
+Known plaintext and ciphertext, we can only get the secret. But the secret is composed of a lot of hashes, as proved above, we cannot get the original text from hash.
+
+② Known ciphertext and some part of plaintext, can I get other part of plaintext?
+
+The secret is composed of a lot of hashes. If we know some part of plaintext, we can get these parts of hashes. But the original text of each hash is all different (need to add the partNumber), and we cannot get the original text from hash, so we cannot know other part of hashes.
+
+③ Known several ciphertext and corresponding plaintext, then can I get the plaintext from another ciphertext that I want to decipher?
+
+When encrypting each time, we need to generate a different random number, we need to include it when calculating the hash. So the secret of each ciphertext is diffferent, there is no definite relationship between plaintext and ciphertext.
+
+## 5. LICENSE
+
+    源代码部分使用 GPL v2 开源协议
+    
+    Hash、对称加密、jtc64算法部分需遵循以下协议：
+        （这里的算法指的是加密方式或编码方式，而不是实现加密或编码的过程）
+        
+        算法不得进行任何修改（包括但不限于：基本方式、字符的使用、位运算信息、位交换信息、乘数、哈希原始字符串、各部分内容位置、版本信息、校验方式）
+        即必须保证如下事项：
+            ① 相同的字符串，使用您的软件和使用我的软件计算，得到的哈希值是相同的
+            ② 经过您的软件加密的内容，使用我的软件可以正常解密并获得正确的内容
+            ③ 经过我的软件加密的内容，使用您的软件可以正常解密并获得正确的内容
+            ④ 相同的字符串或16进制数据，使用您的软件和使用我的软件进行 jtc64 编码，得到的结果是相同的
+            ⑤ 相同的 jtc64 编码数据，使用您的软件和使用我的软件进行解码，得到的结果是相同的
+            ⑥ 如果输入的密文或 jtc64 编码数据是非法的，您的软件必须能够报错或不能正常运行
+        （注：在加密过程中随机生成的32位16进制数，您可以使用不同的生成方式，但必须保证位数和格式相同且足够随机）
+        
+        如果只使用算法，可以随意进行商业使用或进行出售，任何使用均无需注明出处。
+
+## 6. Others
+
+    Emial: jtc1246@outlook.com
+    Requirement: Python 3
+    Installation: pip3 install mySecrets
