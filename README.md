@@ -67,9 +67,25 @@
     Each character stands for the number of its location. e.g. 0 stands for 0, b stands for 11, Z stands for 61
     Step 1: Convert original text to hex
     Step 2: Each time take 3 digits, calculate num, num = first digit * 256 + second digit * 16 + third digit
-            num1 = num // 16; num2 = num % 16, convert num1 and num2 to corresponding jtc64 characters and put them together
+            num1 = num // 64; num2 = num % 64, convert num1 and num2 to corresponding jtc64 characters and put them together
             All 3 hex digits convert to 2 jtc64 characters, then combine the jtc64 characters in the original order
     Step 3: If there is no remaining hex digits, the convertion ends.
             If 1 hex digit remains, add it to the last of jtc64 str directly.
             If 2 hex digits remain, calculate num, num = first digit * 166 + second digit, num1 = num // 4; num2 = num % 4
             Add the jtc64 character corresponding to num1 to the last of jtc64 str, $ % & = each stands for 0,1,2,3 in num2, add it to the last of jtc64 str
+
+## (3) Symmetrical encryption
+
+    Step 1: Get the hash of the key, let it be the key in later program
+    Step 2: Generate a random 32-digit hex value
+            (You can also generate it with other methods or even give a specific value, but it cannot be same in two encryptions)
+    Step 3: Get the hash of the text, take first 16 digits, add it to the last of the text, let this be the text needed to be encrypted
+    Step 4: Generate the secret with the same length to text by using key and the random 32-digit hex value in following process:
+            ① divide into n parts (n=length//64 or length//64+1) (depend on whether it is multiple of 64)
+            ② for each part, get the hash of partNumber+ran+key (ran is the random 32-digit hex value) (partNumber starts from 0)
+            ③ combine the hash of all parts, and then remove the last several digits to make the length same to text
+    Step 5: Add the text and the secret digit by digit
+    Step 6: Add the random 32-digit hex to the first of the result in step 5
+    Step 7: Get the hash of the result in step 6, add the hash to the first of it
+    Step 8: Add '0' in the last (to represent mode or version, because the program may update or add other mode later)
+    Step 9: Convert it to jtc64
