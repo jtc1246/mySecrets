@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='mySecrets',
-    version='0.9.1',
+    version='0.9.0',
     author='Tiancheng Jiao',
     author_email='jtc1246@outlook.com',
     url='https://github.com/jtc1246/mySecrets',
