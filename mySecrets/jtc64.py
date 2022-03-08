@@ -44,6 +44,7 @@ def hexToJtc64(text:str):
         if(r==0):
             return text2
         if(r==1):
+            tmp=dic2[text[-1]]
             return text2+text[-1]
         num2=dic2[text[3*n]]*16+dic2[text[3*n+1]]
         text2=text2+chars[num2//4]+syms[num2%4]
@@ -78,6 +79,7 @@ def jtc64ToHex(text:str):
         if(type==0):
             return text2
         if(type==1):
+            tmp=dic2[text[-1]]
             return text2+text[-1]
         num2=dic1[text[2*n]]*4+dic3[text[2*n+1]]
         text2=text2+hexs[num2//16]+hexs[num2%16]
