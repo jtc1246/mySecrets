@@ -1,4 +1,4 @@
-# MySecrets v1.0.2
+# MySecrets v1.0.3
 
 ## 1. Introduction
 
@@ -114,6 +114,28 @@ The secret is composed of a lot of hashes. If we know some part of plaintext, we
 When encrypting each time, we need to generate a different random number, we need to include it when calculating the hash. So the secret of each ciphertext is diffferent, there is no definite relationship between plaintext and ciphertext.
 
 ## 5. LICENSE
+
+    Source code part follows GPL v2.
+    
+    The algorithm of hash, symmetrical encryption and jtc64 follows the following rule:
+        (The algorithm here means the pattern of encrypting and encoding, not the specific process of encrypting or encoding)
+        
+        Any part of the algorithm cannot be modified. (Including but not limited to: basic way, 
+            the usage of characters, the information of digit operation and digit exchange, multiplier,
+            the original string of hash, the location of each content, version information and checking method)
+        That is, you must obey the following rules:
+            ① Calculating the hash of same str with your program and with my program, the result is same.
+            ② The data encrypted by your program, can be decrypted normally by my program and get the correct data.
+            ③ The data encrypted by my program, can be decrypted normally by your program and get the correct data.
+            ④ Encoding the same str of hex data to jtc64, with your program and with my program, the result is same.
+            ⑤ Decoding the same jtc64 data with your program and with my program, the result is same.
+            ⑥ If the input ciphertext or jtc64 data is invalid, your program must be able to report errors or not work normally.
+        (Note: about the random 32-digit hex number generated when encrypting, you can use different ways to generate it,
+            but it must be in the same length and format and randomized enough)
+            
+        If only using the algorithm, it can be casually used for commercial or sold, no attribution is required for any use.
+
+
 
     源代码部分使用 GPL v2 开源协议
     
